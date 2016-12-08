@@ -26,6 +26,7 @@ class Spider:
     # Creates directory and files for project on first run and starts the spider
     @staticmethod
     def boot():
+        print(Spider.project_name)
         create_project_dir(Spider.project_name)
         create_data_files(Spider.project_name, Spider.base_url)
         Spider.queue = file_to_set(Spider.queue_file)

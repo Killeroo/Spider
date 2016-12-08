@@ -3,15 +3,26 @@ from queue import Queue
 from spider import Spider
 from domain import *
 from general import *
+import sys
 
-PROJECT_NAME = 'viper-seo'
-HOMEPAGE = 'http://viper-seo.com/'
+PROJECT_NAME = 'BU'
+HOMEPAGE = 'http://www1.bournemouth.ac.uk'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
 NUMBER_OF_THREADS = 8
 queue = Queue()
-Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
+
+
+def run():
+    arguments = sys.argv
+    PROJECT_NAME = arguments[1]
+    HOMEPAGE = arguments[2]
+    NUMBER_OF_THREADS = arguments[3]
+
+    Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
+    create_workers()
+    crawl()
 
 
 # Create worker threads (will die when main exits)
@@ -46,5 +57,4 @@ def crawl():
         create_jobs()
 
 
-create_workers()
-crawl()
+run()
